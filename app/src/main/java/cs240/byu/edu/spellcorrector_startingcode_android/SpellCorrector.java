@@ -45,7 +45,7 @@ public class SpellCorrector extends AppCompatActivity
          * TODO set studentController to a new instance of your class that implements ISpellCorrector
          * E.G.: studentController = new MySpellCorrector();
          */
-        studentController = null;
+        studentController = new cs240.byu.edu.spellcorrector_startingcode_android.StudentPackage.SpellCorrector();
 
         mainSearchScreen = (RelativeLayout)findViewById(R.id.mainSearchPage);
 
