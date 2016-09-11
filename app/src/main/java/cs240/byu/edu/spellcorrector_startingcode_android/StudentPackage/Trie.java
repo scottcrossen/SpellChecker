@@ -1,5 +1,7 @@
 package cs240.byu.edu.spellcorrector_startingcode_android.StudentPackage;
 
+import java.util.Set;
+
 /**
  * Created by slxn42 on 9/10/16.
  */
@@ -27,6 +29,8 @@ public class Trie implements ITrie {
     }
     @Override
     public String toString(){
+        Set<String> words=root.toString("");
+        //iterate through and print
         return new String();
     }
     @Override
