@@ -47,12 +47,10 @@ public class Node implements ITrie.INode {
     public String toString(String parents){
         StringBuilder output=new StringBuilder();
         for(int iter=0; iter<Trie.CHILDREN_SIZE; iter++){
-            //System.out.println("trying character "+(char) (iter + 'a'));
             if(nodes[iter] != null){
                 if(nodes[iter].count != 0) {
                     output.append(parents.toLowerCase()+(char) (iter + 'a'));
                     output.append("\n");
-                    //System.out.println("Parents: " + parents.toLowerCase() + " Char:" + (char) (iter + 'a'));
                 }
                 output.append(nodes[iter].toString(parents.toLowerCase() + (char) (iter + 'a')));
             }
@@ -62,7 +60,6 @@ public class Node implements ITrie.INode {
     public Node find(String word){
         if (children(word.toLowerCase().charAt(0)) == null) return null;
         if(word.length()==1){
-            //System.out.println("Visit Count: "+children(word.toLowerCase().charAt(0)).getValue());
             if (children(word.toLowerCase().charAt(0)).getValue()>0)
                 return children(word.toLowerCase().charAt(0));
             else return null;
@@ -79,28 +76,24 @@ public class Node implements ITrie.INode {
     public boolean equals(Object o){
         if (o == this)
             return true;
-        else if (o == null && this != null)
+        else if (o == null)
             return false;
         else if (getClass() != o.getClass())
             return false;
         else{
             Node other = (Node)o;
-            if (count != other.getValue())
+            if (getValue() != other.getValue())
                 return false;
             else {
-                for(int iter=0; iter<Trie.CHILDREN_SIZE; iter++)
-                    if (!(nodes[iter].equals(other.nodes[iter]))) return false;
+                for(int iter=0; iter<Trie.CHILDREN_SIZE; iter++) {
+                    if (nodes[iter]==null && other.nodes[iter]!=null) return false;
+                    if (nodes[iter]!=null)
+                        if (!(nodes[iter].equals(other.nodes[iter]))) return false;
+                }
                 return true;
             }
         }
     }
-    /*public int getNodeCount(){
-        int children_size=0;
-        for(int iter=0; iter<Trie.CHILDREN_SIZE; iter++){
-            if(nodes[iter] != null) children_size+=nodes[iter].getNodeCount();
-        }
-        return children_size;
-    }*/
     public void incrementCount() {
         count++;
     }

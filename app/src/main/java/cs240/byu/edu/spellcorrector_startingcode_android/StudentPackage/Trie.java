@@ -19,7 +19,6 @@ public class Trie implements ITrie {
         int[] output=root.add(word.toLowerCase());
         word_count+=output[1];
         node_count+=output[0];
-        //System.out.println("Words: "+word_count+" Nodes: "+node_count);
     }
     public INode find(String word){
         return root.find(word.toLowerCase());
@@ -52,7 +51,7 @@ public class Trie implements ITrie {
     public boolean equals(Object o){
         if (o == this)
             return true;
-        else if (o == null && this != null)
+        else if (o == null)
             return false;
         else if (getClass() != o.getClass())
             return false;

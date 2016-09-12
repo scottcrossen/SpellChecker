@@ -14,11 +14,6 @@ public class SpellCorrector implements ISpellCorrector{
     private Trie dictionary;
     public SpellCorrector(){
         dictionary = new Trie();
-        //dictionary.add("cares");
-        //dictionary.add("car");
-        //System.out.println("Words: "+dictionary.getWordCount()+" Nodes: "+dictionary.getNodeCount());
-        //System.out.println(dictionary.toString());
-        //System.out.println(dictionary.find("cares") != null);
     }
     public void useDictionary(InputStreamReader dictionaryFile) throws IOException{
         Scanner dictionary_input=new Scanner(dictionaryFile);
