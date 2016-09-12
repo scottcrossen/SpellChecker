@@ -15,12 +15,12 @@ public class Trie implements ITrie {
         root=new Node();
     }
     public void add(String word){
-        int output=root.add(word);
+        int output=root.add(word.toLowerCase());
         if(output >0) word_count++;
         node_count+=output;
     }
     public INode find(String word){
-        return root.find(word);
+        return root.find(word.toLowerCase());
     }
     public int getWordCount(){
         return word_count;

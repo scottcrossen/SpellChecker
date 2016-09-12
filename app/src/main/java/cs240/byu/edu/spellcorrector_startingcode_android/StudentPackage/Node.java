@@ -31,9 +31,9 @@ public class Node implements ITrie.INode {
         for(int iter=0; iter<Trie.CHILDREN_SIZE; iter++){
             if(nodes[iter] != null){
                 if(nodes[iter].count != 0) {
-                    output.add(parents+(char) (iter + 97));
+                    output.add(parents.toLowerCase()+(char) (iter + 'a'));
                 }
-                output.addAll(nodes[iter].toSet(parents+(char) (iter + 97)));
+                output.addAll(nodes[iter].toSet(parents.toLowerCase()+(char) (iter + 'a')));
             }
         }
         return output;
@@ -43,10 +43,10 @@ public class Node implements ITrie.INode {
         for(int iter=0; iter<Trie.CHILDREN_SIZE; iter++){
             if(nodes[iter] != null){
                 if(nodes[iter].count != 0) {
-                    output.append(parents+(char) (iter + 97));
+                    output.append(parents.toLowerCase()+(char) (iter + 'a'));
                     output.append("\n");
                 }
-                output.append(nodes[iter].toString(parents+(char) (iter + 97)));
+                output.append(nodes[iter].toString(parents.toLowerCase()+(char) (iter + 'a')));
             }
         }
         return output.toString();
@@ -56,14 +56,14 @@ public class Node implements ITrie.INode {
             if (count >0) return this;
             else return null;
         }
-        if (children(word.charAt(0)) == null) return null;
-        else return children(word.charAt(0)).find(word.substring(1));
+        if (children(word.toLowerCase().charAt(0)) == null) return null;
+        else return children(word.toLowerCase().charAt(0)).find(word.substring(1));
     }
     public int getValue(){
         return count;
     }
     public Node children(char letter){
-        return nodes[letter-97];
+        return nodes[letter-'a'];
     }
     /*public int getNodeCount(){
         int children_size=0;
