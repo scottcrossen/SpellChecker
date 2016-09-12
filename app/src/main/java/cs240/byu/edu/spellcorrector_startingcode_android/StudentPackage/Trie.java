@@ -32,7 +32,7 @@ public class Trie implements ITrie {
     }
     @Override
     public String toString(){
-        return root.toString();
+        return root.toString("");
     }
     public String stringFromSet(){
         StringBuilder output=new StringBuilder();

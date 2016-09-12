@@ -40,10 +40,12 @@ public class Node implements ITrie.INode {
     public String toString(String parents){
         StringBuilder output=new StringBuilder();
         for(int iter=0; iter<Trie.CHILDREN_SIZE; iter++){
+            //System.out.println("trying character "+(char) (iter + 'a'));
             if(nodes[iter] != null){
                 if(nodes[iter].count != 0) {
                     output.append(parents.toLowerCase()+(char) (iter + 'a'));
                     output.append("\n");
+                    //System.out.println("Parents: " + parents.toLowerCase() + " Char:" + (char) (iter + 'a'));
                 }
                 output.append(nodes[iter].toString(parents.toLowerCase()+(char) (iter + 'a')));
             }
@@ -51,13 +53,13 @@ public class Node implements ITrie.INode {
         return output.toString();
     }
     public Node find(String word){
+        if (children(word.toLowerCase().charAt(0)) == null) return null;
         if(word.length()==1){
-            if (children(word.toLowerCase().charAt(0))==null) return null;
-            if (children(word.toLowerCase().charAt(0)).getValue()>1)
+            //System.out.println("Visit Count: "+children(word.toLowerCase().charAt(0)).getValue());
+            if (children(word.toLowerCase().charAt(0)).getValue()>0)
                 return children(word.toLowerCase().charAt(0));
             else return null;
         }
-        if (children(word.toLowerCase().charAt(0)) == null) return null;
         else return children(word.toLowerCase().charAt(0)).find(word.substring(1));
     }
     public int getValue(){
