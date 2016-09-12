@@ -54,7 +54,7 @@ public class Node implements ITrie.INode {
                     output.append("\n");
                     //System.out.println("Parents: " + parents.toLowerCase() + " Char:" + (char) (iter + 'a'));
                 }
-                output.append(nodes[iter].toString(parents.toLowerCase()+(char) (iter + 'a')));
+                output.append(nodes[iter].toString(parents.toLowerCase() + (char) (iter + 'a')));
             }
         }
         return output.toString();
@@ -74,6 +74,25 @@ public class Node implements ITrie.INode {
     }
     public Node children(char letter){
         return nodes[letter-'a'];
+    }
+    @Override
+    public boolean equals(Object o){
+        if (o == this)
+            return true;
+        else if (o == null && this != null)
+            return false;
+        else if (getClass() != o.getClass())
+            return false;
+        else{
+            Node other = (Node)o;
+            if (count != other.getValue())
+                return false;
+            else {
+                for(int iter=0; iter<Trie.CHILDREN_SIZE; iter++)
+                    if (!(nodes[iter].equals(other.nodes[iter]))) return false;
+                return true;
+            }
+        }
     }
     /*public int getNodeCount(){
         int children_size=0;

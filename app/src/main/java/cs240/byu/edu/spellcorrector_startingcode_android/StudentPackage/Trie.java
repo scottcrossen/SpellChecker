@@ -52,7 +52,7 @@ public class Trie implements ITrie {
     public boolean equals(Object o){
         if (o == this)
             return true;
-        else if (o == null)
+        else if (o == null && this != null)
             return false;
         else if (getClass() != o.getClass())
             return false;
@@ -63,7 +63,7 @@ public class Trie implements ITrie {
             else if (word_count != other.word_count || node_count != other.node_count)
                 return false;
             else
-                return true;
+                return root.equals(other.root);
         }
     }
 }
