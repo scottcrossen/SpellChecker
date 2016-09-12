@@ -15,25 +15,25 @@ public class Node implements ITrie.INode {
     }
     /* Returns amount of nodes added */
     public int add(String sub_word){
-        if(sub_word==""){
-            count++;
-            return 0;
-        }
+        int add_factor=0; // If new node is created add 1 to recursive return.
         if(children(sub_word.toLowerCase().charAt(0))==null){
-            Node add_node=children(sub_word.toLowerCase().charAt(0));
-            add_node=new Node();
-            return 1+children(sub_word.toLowerCase().charAt(0)).add(sub_word.substring(1));
+            nodes[sub_word.toLowerCase().charAt(0)-'a'] = new Node();
+            add_factor=1;
         }
-        return children(sub_word.toLowerCase().charAt(0)).add(sub_word.substring(1));
+        if(sub_word.length()==1) {
+            children(sub_word.toLowerCase().charAt(0)).incrementCount();
+            return add_factor;
+        }
+        return add_factor+children(sub_word.toLowerCase().charAt(0)).add(sub_word.substring(1));
     }
     public Set<String> toSet(String parents){
         Set<String> output=new TreeSet<String>();
         for(int iter=0; iter<Trie.CHILDREN_SIZE; iter++){
             if(nodes[iter] != null){
                 if(nodes[iter].count != 0) {
-                    output.add(parents.toLowerCase()+(char) (iter + 'a'));
+                    output.add(parents.toLowerCase() + (char) (iter + 'a'));
                 }
-                output.addAll(nodes[iter].toSet(parents.toLowerCase()+(char) (iter + 'a')));
+                output.addAll(nodes[iter].toSet(parents.toLowerCase() + (char) (iter + 'a')));
             }
         }
         return output;
@@ -52,8 +52,10 @@ public class Node implements ITrie.INode {
         return output.toString();
     }
     public Node find(String word){
-        if (word==""){
-            if (count >0) return this;
+        if(word.length()==1){
+            if (children(word.toLowerCase().charAt(0))==null) return null;
+            if (children(word.toLowerCase().charAt(0)).getValue()>1)
+                return children(word.toLowerCase().charAt(0));
             else return null;
         }
         if (children(word.toLowerCase().charAt(0)) == null) return null;
