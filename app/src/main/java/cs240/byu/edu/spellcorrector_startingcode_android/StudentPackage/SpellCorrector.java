@@ -15,6 +15,7 @@ public class SpellCorrector implements ISpellCorrector{
     public SpellCorrector(){
         dictionary = new Trie();
         //dictionary.add("cares");
+        //dictionary.add("car");
         //System.out.println("Words: "+dictionary.getWordCount()+" Nodes: "+dictionary.getNodeCount());
         //System.out.println(dictionary.toString());
         //System.out.println(dictionary.find("cares") != null);

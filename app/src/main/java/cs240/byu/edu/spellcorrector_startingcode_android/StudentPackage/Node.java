@@ -11,19 +11,26 @@ public class Node implements ITrie.INode {
     public Node[] nodes;
     public Node() {
         nodes = new Node[Trie.CHILDREN_SIZE];
+        count = 0;
     }
     /* Returns amount of nodes added */
-    public int add(String sub_word){
-        int add_factor=0; // If new node is created add 1 to recursive return.
+    public int[] add(String sub_word){
+        int[] output= new int[2]; // Yeah this is a crappy method to do this but I don't want to change my code.
+        output[0]=0; // If new node is created add 1 to recursive return.
         if(children(sub_word.toLowerCase().charAt(0))==null){
             nodes[sub_word.toLowerCase().charAt(0)-'a'] = new Node();
-            add_factor=1;
+            output[0]=1;
         }
         if(sub_word.length()==1) {
             children(sub_word.toLowerCase().charAt(0)).incrementCount();
-            return add_factor;
+            if(children(sub_word.toLowerCase().charAt(0)).getValue()==1)
+                output[1]=1;
+            return output;
         }
-        return add_factor+children(sub_word.toLowerCase().charAt(0)).add(sub_word.substring(1));
+            int[] temp_output = children(sub_word.toLowerCase().charAt(0)).add(sub_word.substring(1));
+            output[0] = output[0] + temp_output[0];
+            output[1] = temp_output[1];
+            return output;
     }
     public Set<String> toSet(String parents){
         Set<String> output=new TreeSet<String>();

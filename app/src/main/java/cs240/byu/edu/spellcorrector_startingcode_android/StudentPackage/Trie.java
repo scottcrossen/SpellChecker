@@ -16,9 +16,9 @@ public class Trie implements ITrie {
         node_count=1;
     }
     public void add(String word){
-        int output=root.add(word.toLowerCase());
-        if(output >0) word_count++;
-        node_count+=output;
+        int[] output=root.add(word.toLowerCase());
+        word_count+=output[1];
+        node_count+=output[0];
         //System.out.println("Words: "+word_count+" Nodes: "+node_count);
     }
     public INode find(String word){
