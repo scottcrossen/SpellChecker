@@ -58,6 +58,8 @@ public class Node implements ITrie.INode {
         return output.toString();
     }
     public Node find(String word){
+        if (word==null) return null;
+        if(word.length()==0) return null;
         if (children(word.toLowerCase().charAt(0)) == null) return null;
         if(word.length()==1){
             if (children(word.toLowerCase().charAt(0)).getValue()>0)

@@ -66,6 +66,7 @@ public class SpellCorrector implements ISpellCorrector{
         return new_suggestions;
     }
     private Set<String> deletionChange(Set<String> old_suggestions) {
+        System.out.println("Flag 1");
         Set<String> new_suggestions=new TreeSet<String>();
         Iterator<String> iter = old_suggestions.iterator();
         while (iter.hasNext()) {
@@ -77,6 +78,7 @@ public class SpellCorrector implements ISpellCorrector{
         return new_suggestions;
     }
     private Set<String> transpositionChange(Set<String> old_suggestions) {
+        System.out.println("Flag 2");
         Set<String> new_suggestions=new TreeSet<String>();
         Iterator<String> iter = old_suggestions.iterator();
         while (iter.hasNext()) {
@@ -88,6 +90,7 @@ public class SpellCorrector implements ISpellCorrector{
         return new_suggestions;
     }
     private Set<String> alterationChange(Set<String> old_suggestions) {
+        System.out.println("Flag 3");
         Set<String> new_suggestions=new TreeSet<String>();
         Iterator<String> iter = old_suggestions.iterator();
         while (iter.hasNext()) {
@@ -101,6 +104,7 @@ public class SpellCorrector implements ISpellCorrector{
         return new_suggestions;
     }
     private Set<String> insertionChange(Set<String> old_suggestions) {
+        System.out.println("Flag 4");
         Set<String> new_suggestions=new TreeSet<String>();
         Iterator<String> iter = old_suggestions.iterator();
         while (iter.hasNext()) {
