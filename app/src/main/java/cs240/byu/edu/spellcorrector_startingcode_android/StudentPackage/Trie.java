@@ -1,5 +1,6 @@
 package cs240.byu.edu.spellcorrector_startingcode_android.StudentPackage;
 
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -19,7 +20,7 @@ public class Trie implements ITrie {
         nodeCount+=output;
     }
     public INode find(String word){
-        return new Node();
+        return root.find(word);
     }
     public int getWordCount(){
         return wordCount;
@@ -29,9 +30,17 @@ public class Trie implements ITrie {
     }
     @Override
     public String toString(){
-        Set<String> words=root.toString("");
-        //iterate through and print
-        return new String();
+        return root.toString();
+    }
+    public String stringFromSet(){
+        StringBuilder output=new StringBuilder();
+        Set<String> words=root.toSet("");
+        Iterator<String> it = words.iterator();
+        while(it.hasNext()){
+            output.append(it.next().toString());
+            output.append("\n");
+        }
+        return output.toString();
     }
     @Override
     public int hashCode(){

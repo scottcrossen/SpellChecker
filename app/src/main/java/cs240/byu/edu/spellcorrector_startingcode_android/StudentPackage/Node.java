@@ -26,7 +26,7 @@ public class Node implements ITrie.INode {
         }
         return children(subWord.toLowerCase().charAt(0)).add(subWord.substring(1));
     }
-    public Set<String> toString(String parents){
+    public Set<String> toSet(String parents){
         Set<String> output=new HashSet();
         for(int iter=0; iter<Trie.CHILDREN_SIZE; iter++){
             if(nodes[iter] != null){
@@ -37,10 +37,31 @@ public class Node implements ITrie.INode {
                     output.add(newWord.toString());*/
                     output.add(parents+(char) (iter + 97));
                 }
-                output.addAll(nodes[iter].toString(parents+(char) (iter + 97)));
+                output.addAll(nodes[iter].toSet(parents+(char) (iter + 97)));
             }
         }
         return output;
+    }
+    public String toString(String parents){
+        StringBuilder output=new StringBuilder();
+        for(int iter=0; iter<Trie.CHILDREN_SIZE; iter++){
+            if(nodes[iter] != null){
+                if(nodes[iter].count != 0) {
+                    output.append(parents+(char) (iter + 97));
+                    output.append("\n");
+                }
+                output.append(nodes[iter].toString(parents+(char) (iter + 97)));
+            }
+        }
+        return output.toString();
+    }
+    public Node find(String word){
+        if (word==""){
+            if (count >0) return this;
+            else return null;
+        }
+        if (children(word.charAt(0)) == null) return null;
+        else return children(word.charAt(0)).find(word.substring(1));
     }
     public int getValue(){
         return count;
