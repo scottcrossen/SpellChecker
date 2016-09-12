@@ -8,7 +8,6 @@ import java.util.Set;
  */
 public class Node implements ITrie.INode {
     private int count;
-    //private String word;
     public Node[] nodes;
     public Node() {
         nodes = new Node[Trie.CHILDREN_SIZE];

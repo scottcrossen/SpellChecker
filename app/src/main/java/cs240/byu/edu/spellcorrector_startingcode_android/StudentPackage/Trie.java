@@ -13,11 +13,13 @@ public class Trie implements ITrie {
     public static int CHILDREN_SIZE = 26;
     public Trie(){
         root=new Node();
+        node_count=1;
     }
     public void add(String word){
         int output=root.add(word.toLowerCase());
         if(output >0) word_count++;
         node_count+=output;
+        //System.out.println("Words: "+word_count+" Nodes: "+node_count);
     }
     public INode find(String word){
         return root.find(word.toLowerCase());
@@ -44,10 +46,24 @@ public class Trie implements ITrie {
     }
     @Override
     public int hashCode(){
-        return 0;
+        return 31*node_count*word_count;
     }
     @Override
     public boolean equals(Object o){
-        return false;
+        if (o == this)
+            return true;
+        else if (o == null)
+            return false;
+        else if (getClass() != o.getClass())
+            return false;
+        else{
+            Trie other = (Trie)o;
+            if (hashCode() != other.hashCode())
+                return false;
+            else if (word_count != other.word_count || node_count != other.node_count)
+                return false;
+            else
+                return true;
+        }
     }
 }
