@@ -1,6 +1,6 @@
 package cs240.byu.edu.spellcorrector_startingcode_android.StudentPackage;
 
-import java.util.HashSet;
+import java.util.TreeSet;
 import java.util.Set;
 
 /**
@@ -14,27 +14,23 @@ public class Node implements ITrie.INode {
         nodes = new Node[Trie.CHILDREN_SIZE];
     }
     /* Returns amount of nodes added */
-    public int add(String subWord){
-        if(subWord==""){
+    public int add(String sub_word){
+        if(sub_word==""){
             count++;
             return 0;
         }
-        if(children(subWord.toLowerCase().charAt(0))==null){
-            Node add_node=children(subWord.toLowerCase().charAt(0));
+        if(children(sub_word.toLowerCase().charAt(0))==null){
+            Node add_node=children(sub_word.toLowerCase().charAt(0));
             add_node=new Node();
-            return 1+children(subWord.toLowerCase().charAt(0)).add(subWord.substring(1));
+            return 1+children(sub_word.toLowerCase().charAt(0)).add(sub_word.substring(1));
         }
-        return children(subWord.toLowerCase().charAt(0)).add(subWord.substring(1));
+        return children(sub_word.toLowerCase().charAt(0)).add(sub_word.substring(1));
     }
     public Set<String> toSet(String parents){
-        Set<String> output=new HashSet();
+        Set<String> output=new TreeSet<String>();
         for(int iter=0; iter<Trie.CHILDREN_SIZE; iter++){
             if(nodes[iter] != null){
                 if(nodes[iter].count != 0) {
-                    /*StringBuilder newWord=new StringBuilder();
-                    newWord.append(parents);
-                    newWord.append((char) (iter + 97));
-                    output.add(newWord.toString());*/
                     output.add(parents+(char) (iter + 97));
                 }
                 output.addAll(nodes[iter].toSet(parents+(char) (iter + 97)));
@@ -75,12 +71,6 @@ public class Node implements ITrie.INode {
             if(nodes[iter] != null) children_size+=nodes[iter].getNodeCount();
         }
         return children_size;
-    }*/
-    /*public String getWord(){
-        return word;
-    }
-    public void setWord(String word) {
-        this.word = word;
     }*/
     public void incrementCount() {
         count++;

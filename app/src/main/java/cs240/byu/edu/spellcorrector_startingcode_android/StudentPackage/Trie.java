@@ -8,25 +8,25 @@ import java.util.Set;
  */
 public class Trie implements ITrie {
     private Node root;
-    private int wordCount;
-    private int nodeCount;
+    private int word_count;
+    private int node_count;
     public static int CHILDREN_SIZE = 26;
     public Trie(){
         root=new Node();
     }
     public void add(String word){
         int output=root.add(word);
-        if(output >0) wordCount++;
-        nodeCount+=output;
+        if(output >0) word_count++;
+        node_count+=output;
     }
     public INode find(String word){
         return root.find(word);
     }
     public int getWordCount(){
-        return wordCount;
+        return word_count;
     }
     public int getNodeCount(){
-        return nodeCount;
+        return node_count;
     }
     @Override
     public String toString(){
